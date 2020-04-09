@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Flavicon and style sheet-->
+    
+    <!-- Title -->
+    <title>Book Reviews: {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <!-- Nav Bar -->
+    {% set logged_out_user_bar = [
+        ('/register','register','Register'),
+        ('/login','login', 'Login'),
+    ] -%}
+    {% set logged_in_user_bar = [
+        ('/userSettings ','usersettings','User Settings'),
+        ('/logout','logout', 'Log Out'),
+    ] -%}
+    {% set logged_in_main_bar = [
+        ('/','home','Home'),
+    ] -%}
+
+    {% set active_page = active_page|default('home') -%}
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+        <div class="mr-auto order-0">
+            <a class="navbar-brand mr-auto" href="/">Logo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        {% if session.user_id %}
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    {% for href, id, caption in logged_in_main_bar %}
+                    <li {% if id == active_page %} class="nav-item active" {% endif %}>
+                        <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                {% for href, id, caption in logged_in_user_bar %}
+                <li {% if id == active_page %} class="nav-item active" {% endif %}>
+                    <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNav">
+            <ul class="navbar-nav mr-auto"></ul>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                {% for href, id, caption in logged_out_user_bar %}
+                <li {% if id == active_page %} class="nav-item active" {% endif %}>
+                    <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        </div>
+        {% endif %}
+        </div>
+    </nav>
+    <!-- Flashed messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <header>
+            {% for category, message in messages %}
+            <div class="alert alert-{{category}} border text-center" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </header>
+        {% endif %}
+    {% endwith %}
+    <!-- Changeable main body -->
+    <main class="container p-5">
+        {% block main %}{% endblock %}
+    </main>
+    <!-- Footer -->
+    <footer class="small text-center text-muted">
+        Designed by Max Fancourt ©2020. Powered By Llamas.
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
