@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% set active_page = "search" %}
+
+{% block scripts %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" class="init">
+    $(document).ready(function() {
+        $('#results').DataTable(
+        {
+            scrollY: '50vh',
+            scrollCollapse: true,
+            paging: false,
+            "order": [[ 0, "asc" ]]
+        },
+
+        );
+    } );  
+</script>
+{% endblock %}
+<!-- Title -->
+{% block title %}Search Results{% endblock %}
+{% block main%}
+<!-- Main body -->
+<div class="container">
+    <table id="results" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Author</th>
+              <th scope="col">Year</th>
+              <th scope="col">ISBN</th>
+            </tr>
+          </thead>
+        <tbody>
+            {% for row in books %}
+            <tr>
+                <td><a href="{{ url_for('bookInfo', bookID=row['ID']) }}">{{ row['title'] }} </a></td>
+                <td>{{ row['author'] }}</td>
+                <td>{{ row['year'] }}</td>
+                <td>{{ row["ISBN"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <b>Click on the title of each book to be view more information and leave book reviews</b>
+</div>
+{% endblock %}

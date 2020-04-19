@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+<!-- Title -->
+{% block title %}Search{% endblock %}
+{% block main %}
+<!-- Main body -->
+<div class="jumbotron">
+    <h1 class="display-4">Search Page</h1>
+    <p class="lead">You can search for a title, an author or if you know it the ISBN number of a book for which you are looking for. Hit Enter or the Seach button after providing the search information to seach our database for information</p>
+    <hr class="my-4">
+    <form action="/results">
+        <div class="form-group">
+            <label for="search_bar">Please enter either a book title, an author, or an ISBN number to search</label>
+            <input type="text" name="q" class="form-control" id="search_bar" placeholder="What do you want to search for?">
+        </div>
+        <button type="text" class="btn btn-primary">Search</button>
+    </form>
+</div>
+{% endblock %}

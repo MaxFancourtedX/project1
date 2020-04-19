@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% set active_page = "search" %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css//main.css') }}">
+{% endblock %}
+<!-- Title -->
+{% block title %}More Information{% endblock %}
+{% block main%}
+<!-- Main body -->
+<!-- Database book information and goodreadsData -->
+  <div class="jumbotron">
+      <h1 class="display-4">Writing a Review For</h1>
+      <p class="lead"> {{ bookInfo['title'] }} by {{ bookInfo['author'] }}</p>
+      <hr class="my-4">
+      <p>Please note you can only submit one review for any particular book</p>
+      <form name="user_text_review" action="results.html" method="POST">
+        <div class="form-group">
+          <label for="text_review">Text review</label>
+          <textarea class="form-control" id="text_review" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="numerical_review">Rating out of Five</label>
+          <select name="user_rating" class="form-control" id="numerical_review">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+  </div>
+<!-- Review data form -->
+
+{% endblock %}

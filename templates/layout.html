@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- BootStrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!-- Extra scripts if needed -->
+    {% block scripts %}{% endblock %}
     <!-- Flavicon and style sheet-->
     
     <!-- Title -->
@@ -22,12 +25,12 @@
         ('/logout','logout', 'Log Out'),
     ] -%}
     {% set logged_in_main_bar = [
-        ('/','home','Home'),
+        ('/search','search','Search'),
     ] -%}
 
     {% set active_page = active_page|default('home') -%}
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
         <div class="mr-auto order-0">
             <a class="navbar-brand mr-auto" href="/">Logo</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
@@ -35,7 +38,7 @@
             </button>
         </div>
         {% if session.user_id %}
-        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarNav">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2"" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     {% for href, id, caption in logged_in_main_bar %}
                     <li {% if id == active_page %} class="nav-item active" {% endif %}>
@@ -91,14 +94,6 @@
     </footer>
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% set active_page = "search" %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css//main.css') }}">
+{% endblock %}
+<!-- Title -->
+{% block title %}More Information{% endblock %}
+{% block main%}
+<!-- Main body -->
+<!-- Database book information and goodreadsData -->
+<div class="jumbotron">
+    <h1 class="display-4"> {{ book['title'] }}</h1>
+    <p class="lead"> {{ book['author'] }}</p>
+    <hr class="my-4">
+    <p><b>Year Published:</b> {{ book['year'] }}</p>
+    <p><b>ISBN:</b> {{ book['ISBN'] }}</p>
+    <p><b>Goodreads Average Rating:</b> {{ goodreadsdata['books'][0]['average_rating'] }}</p>
+    <p><b>Goodreads Number of Ratings:</b> {{ "{:,}".format(goodreadsdata['books'][0]['work_ratings_count']) }}</p>
+</div>
+  <h1>Reviews From Users of this Site</h1>
+{% for review in own_reviews %}
+  <div class="card">
+      <div class="card-header">{{ review['title'] }}  - Rating {{ review['rating'] }}</div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>{{ review['review'] }}</p>
+          <footer class="blockquote-footer"> Reviewed by {{ review['firstName'] }}</footer>
+        </blockquote>
+      </div>
+    </div>
+{% endfor %}
+<p></p>
+<div>
+  <h1>Write a Review</h1>
+  <h5>Please note that you can only submit one review per book</h5>
+  <form action="{{ url_for('bookInfo', bookID=book['ID']) }}" method="POST">
+    <div class="form-group">
+      <label for="review_title">Title of your review</label>
+      <input type="text" class="form-control" id="review_title" name="review_title">
+      <small id="review_title_help" class="form-text text-muted">A single line summary of your review</small>
+    </div>
+    <div class="form-group">
+      <label for="text_review">Your review</label>
+      <textarea class="form-control" id="text_review" name="text_review" rows="10"></textarea>
+      <small id="text_review_help" class="form-text text-muted">Your full review of the book</small>
+    </div>
+    <div class="form-group">
+      <label for="numerical_review">Rating out of Five</label>
+      <select name="user_rating" class="form-control" id="numerical_review">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      <small id="user_rating_help" class="form-text text-muted">1 means you dislike the book strongly, and 5 indicates you loved it</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<!-- Own reviews data -->
+{% endblock %}

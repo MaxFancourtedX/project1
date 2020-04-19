@@ -10,13 +10,21 @@
         <hr class="my-4">
         <form action="/register" method="POST">
             <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First Name" autofocus autocomplete="on">
+            </div>
+            <div class="form-group">
+              <label for="familyName">Family Name</label>
+              <input type="text" name="familyName" class="form-control" id="familyName" placeholder="Family Name" autofocus autocomplete="on">
+            </div>
+            <div class="form-group">
               <label for="emailAddress">Email address</label>
-              <input type="email" class="form-control" id="emailAddress" autofocus aria-describedby="emailHelp" placeholder="Email Address" autocomplete="off">
+              <input type="email" name="emailAddress" class="form-control" id="emailAddress" aria-describedby="emailHelp" placeholder="Email Address" autocomplete="on">
               <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
               <label for="password1">Password</label>
-              <input type="password" class="form-control" id="password1" placeholder="Password" autocomplete="off">
+              <input type="password" name="password" class="form-control" id="password1" placeholder="Password" autocomplete="off">
               <small class="form-text text-muted">Minimum length of 6 characters</small>
             </div>
             <div class="form-group">

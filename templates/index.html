@@ -2,7 +2,12 @@
 {% set active_page = "index" %}
 <!-- Title -->
 {% block title %}index{% endblock %}
+{% block main%}
 <!-- Main body -->
-{% block main %}
-
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Book Review</h1>
+    <p class="lead">This site will allow you to create an account, search and see book stats leave reviews for books, see the reiews left by others. This site has been produced to meet in part the requirements for CS50W</p>
+    <hr class="my-4">
+    <p class="">To search, see the reviews of others and see book stats you must first <a href="/register">Register for an account</a> if you already have an account then you must <a href="/login">Login</a>.</p>
+</div>
 {% endblock %}
